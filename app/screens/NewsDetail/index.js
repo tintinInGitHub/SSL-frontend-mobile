@@ -19,7 +19,7 @@ function NewsDetail({ route, navigation }) {
         <YoutubePlayer
           height={Dimensions.get("window").width * 0.5625}
           width={"100%"}
-          videoId={Utils.getVideoId(news.video_url)}
+          videoId={Utils.getVideoId(news.video_banner.video_url)}
           play={true}
           resumePlayAndroid={false}
           webViewProps={{
@@ -35,8 +35,14 @@ function NewsDetail({ route, navigation }) {
   const renderContent = () => {
     return (
       <View>
-        <Text>Content {JSON.stringify(news)}</Text>
-        <Text>{Utils.getVideoId(news.video_url)}</Text>
+        <Text>
+          Content{" "}
+          {
+            (JSON.stringify(news.video_banner.video_url),
+            Utils.getVideoId(news.video_banner.video_url))
+          }
+        </Text>
+        <Text>{Utils.getVideoId(news.video_banner.video_url)}</Text>
       </View>
     );
   };
