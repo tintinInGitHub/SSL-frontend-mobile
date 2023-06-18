@@ -1,4 +1,6 @@
-import { StyleSheet, Platform } from "react-native";
+import React from "react";
+import { StyleSheet, I18nManager } from "react-native";
+// import { BaseStyle } from "@config";
 
 export default StyleSheet.create({
   contain: { height: 45, flexDirection: "row" },
@@ -13,7 +15,6 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-
   contentRight: {
     justifyContent: "center",
     alignItems: "flex-end",

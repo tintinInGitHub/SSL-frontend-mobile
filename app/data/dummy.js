@@ -1,5 +1,7 @@
 import Category from "../models/category";
 import Meal from "../models/meal";
+import News from "../models/news";
+import Branch from "../models/branch";
 
 export const CATEGORIES = [
   new Category("c1", "Italian", "#f5428d"),
@@ -12,6 +14,53 @@ export const CATEGORIES = [
   new Category("c8", "Asian", "#b9ffb0"),
   new Category("c9", "French", "#ffc7ff"),
   new Category("c10", "Summer", "#47fced"),
+];
+
+export const BRANCH = [
+  new Branch("c1", "Bangna", "#f5428d", "open"),
+  new Branch("c2", "Bangpli", "#f54242", "open"),
+  new Branch("c3", "C", "#f5a442", "close"),
+  new Branch("c4", "D", "#f5d142", "close"),
+  new Branch("c5", "E", "#368dff", "close"),
+  new Branch("c6", "F", "#41d95d", "close"),
+  new Branch("c7", "G", "#9eecff", "close"),
+  new Branch("c8", "H", "#b9ffb0", "close"),
+  new Branch("c9", "I", "#ffc7ff", "close"),
+  new Branch("c10", "J", "#47fced", "close"),
+];
+
+export const NEWS = [
+  new News(
+    "c1",
+    "Italian",
+    "#f5428d",
+    "https://www.youtube.com/watch?v=D-AlVUXUrew",
+    "a",
+    "1"
+  ),
+  new News(
+    "c2",
+    "Quick & Easy",
+    "#f54242",
+    "https://www.youtube.com/watch?v=a5O8_2bTlOk",
+    "b",
+    "2"
+  ),
+  new News(
+    "c3",
+    "Hamburgers",
+    "#f5a442",
+    "https://www.youtube.com/watch?v=rboiHxBqdZk",
+    "c",
+    "3"
+  ),
+  // new Category("c4", "German", "#f5d142"),
+  // new Category("c5", "Light & Lovely", "#368dff"),
+  // new Category("c6", "Exotic", "#41d95d"),
+  // new Category("c7", "Breakfast", "#9eecff"),
+  // new Category("c8", "Asian", "#b9ffb0"),
+  // new Category("c9", "French", "#ffc7ff"),
+  // new Category("c10", "Summer", "#47fced"),
 ];
 
 export const MEALS = [

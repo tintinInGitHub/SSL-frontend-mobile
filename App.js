@@ -11,6 +11,9 @@ import FoodCategories from "./app/screens/FoodCategories/index.js";
 import FoodListByCat from "./app/screens/FoodListByCat/index.js";
 import NewsDetail from "./app/screens/NewsDetail/index.js";
 import Tabs from "./app/navigation/tabs.js";
+import BranchBook from "./app/screens/BranchBook/index.js";
+import Booking from "./app/screens/Booking/index.js";
+import BookingDate from "./app/screens/BookingDate/index.js";
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +45,12 @@ export default function App() {
           <Stack.Screen
             name="FoodListByCat"
             component={FoodListByCat}
+          ></Stack.Screen>
+          <Stack.Screen name="BranchBook" component={BranchBook}></Stack.Screen>
+          <Stack.Screen name="Booking" component={Booking}></Stack.Screen>
+          <Stack.Screen
+            name="BookingDate"
+            component={BookingDate}
           ></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>

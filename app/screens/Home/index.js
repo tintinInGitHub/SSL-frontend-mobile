@@ -1,12 +1,12 @@
 import { View, Text, StyleSheet, Image } from "react-native";
 import CategoryGridTile from "../../components/CategoryGridTile";
 import { FlatList } from "react-native";
-import { CATEGORIES } from "../../data/dummy.js";
+import { CATEGORIES, NEWS } from "../../data/dummy.js";
 
 function Home({ navigation }) {
   function renderCategoryItem(itemData) {
     function pressHandler() {
-      navigation.navigate("NewsDetail");
+      navigation.navigate("NewsDetail", { news: itemData.item });
     }
     return (
       <CategoryGridTile
@@ -21,7 +21,7 @@ function Home({ navigation }) {
     <View>
       <Text>News Promotions & more</Text>
       <FlatList
-        data={CATEGORIES}
+        data={NEWS}
         keyExtractor={(item) => item.id}
         renderItem={renderCategoryItem}
         numColumns={1}

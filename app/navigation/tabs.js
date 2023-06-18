@@ -7,6 +7,7 @@ import NewsDetail from "../screens/NewsDetail";
 import styles from "./style";
 import { View, Image, Text } from "react-native";
 import { TouchableOpacity } from "react-native";
+import BranchBook from "../screens/BranchBook";
 
 const Tab = createBottomTabNavigator();
 const CustomTabBarButton = ({ children, onPress }) => (
@@ -77,8 +78,8 @@ function Tabs() {
         }}
       ></Tab.Screen>
       <Tab.Screen
-        name="FoodDetail"
-        component={FoodDetail}
+        name="FoodCategories"
+        component={FoodCategories}
         options={{
           tabBarIcon: ({ focused }) => (
             <Image
@@ -121,7 +122,7 @@ function Tabs() {
         component={FoodCategories}
       ></Tab.Screen> */}
       <Tab.Screen
-        name="FoodCategories"
+        name="BranchBook"
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.container}>
@@ -145,7 +146,7 @@ function Tabs() {
             </View>
           ),
         }}
-        component={FoodCategories}
+        component={BranchBook}
       ></Tab.Screen>
       {/* <Tab.Screen name="FoodListByCat" component={FoodListByCat}></Tab.Screen> */}
       {/* <Tab.Screen
