@@ -9,6 +9,7 @@ import Icon from "../../components/Icon/index";
 import { BaseColor } from "../../config/theme";
 import { TouchableOpacity } from "react-native";
 import { useState } from "react";
+import axios from "axios";
 
 function NewsDetail({ route, navigation }) {
   const news = route.params.news;
@@ -19,7 +20,7 @@ function NewsDetail({ route, navigation }) {
         <YoutubePlayer
           height={Dimensions.get("window").width * 0.5625}
           width={"100%"}
-          videoId={Utils.getVideoId(news.video_banner.video_url)}
+          videoId={Utils.getVideoId(news?.video_banner?.video_url)}
           play={true}
           resumePlayAndroid={false}
           webViewProps={{
@@ -38,11 +39,11 @@ function NewsDetail({ route, navigation }) {
         <Text>
           Content{" "}
           {
-            (JSON.stringify(news.video_banner.video_url),
-            Utils.getVideoId(news.video_banner.video_url))
+            (JSON.stringify(news?.video_banner?.video_url),
+            Utils.getVideoId(news?.video_banner?.video_url))
           }
         </Text>
-        <Text>{Utils.getVideoId(news.video_banner.video_url)}</Text>
+        <Text>{Utils.getVideoId(news?.video_banner?.video_url)}</Text>
       </View>
     );
   };
@@ -50,8 +51,27 @@ function NewsDetail({ route, navigation }) {
     console.log("like", like);
     if (!like) {
       setLiked(!like);
+      axios
+        .post("http://10.0.2.2:1337/api/liked", { promo: 1, user: 1111 })
+        .then((response) => {})
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
       setLiked(null);
+      axios
+        .post("http://10.0.2.2:1337/api/unliked", { promo: 1, user: 1111 })
+        .then((response) => {
+          // if (response.data && response.data[0]) {
+          //   // setQuote(response.data[0].text);
+          // } else {
+          //   console.log("No quote found in response");
+          // }
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
   const [liked, setLiked] = useState(null);

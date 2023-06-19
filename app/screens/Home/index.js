@@ -41,8 +41,8 @@ function Home({ navigation }) {
     <View>
       <Text>News Promotions & more</Text>
       <FlatList
-        data={promo}
-        // data={NEWS}
+        // data={promo}
+        data={NEWS}
         keyExtractor={(item) => item.id}
         renderItem={renderCategoryItem}
         numColumns={1}
