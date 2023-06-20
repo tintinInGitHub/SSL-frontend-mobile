@@ -8,7 +8,7 @@ import * as Utils from "../../utils";
 import Icon from "../../components/Icon/index";
 import { BaseColor } from "../../config/theme";
 import { TouchableOpacity } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 function NewsDetail({ route, navigation }) {
@@ -52,7 +52,7 @@ function NewsDetail({ route, navigation }) {
     if (!like) {
       setLiked(!like);
       axios
-        .post("http://10.0.2.2:1337/api/liked", { promo: 1, user: 1111 })
+        .post("http://10.0.2.2:1337/api/liked", { promo: news.id, user: 1111 })
         .then((response) => {})
         .catch((error) => {
           console.log(error);
@@ -60,7 +60,10 @@ function NewsDetail({ route, navigation }) {
     } else {
       setLiked(null);
       axios
-        .post("http://10.0.2.2:1337/api/unliked", { promo: 1, user: 1111 })
+        .post("http://10.0.2.2:1337/api/unliked", {
+          promo: news.id,
+          user: 1111,
+        })
         .then((response) => {
           // if (response.data && response.data[0]) {
           //   // setQuote(response.data[0].text);
@@ -86,7 +89,7 @@ function NewsDetail({ route, navigation }) {
         style={{ paddingLeft: 0 }}
       >
         <View style={styles.iconContain}>
-          {!liked ? (
+          {liked ? (
             <Icon name={"heart"} size={20} color={BaseColor.sakuraColor}></Icon>
           ) : (
             <Icon name={"heart"} size={20} color={BaseColor.grayColor}></Icon>
@@ -95,6 +98,28 @@ function NewsDetail({ route, navigation }) {
       </TouchableOpacity>
     );
   };
+  const onRefresh = async () => {
+    console.log("onref");
+    loadLike();
+  };
+
+  const loadLike = async () => {
+    console.log("loadLike");
+    axios
+      .post("http://10.0.2.2:1337/api/isLiked", { id: news.id, user: 1111 })
+      .then((response) => {
+        console.log(response.data.liked);
+        setLiked(response.data.liked);
+        console.log(liked);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    loadLike();
+  }, []);
   return (
     <SafeAreaView style={{ flex: 1 }} forceInset={{ top: "always" }}>
       <View style={styles.container}>

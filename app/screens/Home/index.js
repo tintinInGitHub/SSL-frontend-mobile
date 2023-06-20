@@ -1,9 +1,17 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  RefreshControl,
+  SafeAreaView,
+} from "react-native";
 import CategoryGridTile from "../../components/CategoryGridTile";
 import { FlatList } from "react-native";
 import { useEffect, useState } from "react";
 import { CATEGORIES, NEWS } from "../../data/dummy.js";
 import axios from "axios";
+import { ScrollView } from "react-native-gesture-handler";
 
 function Home({ navigation }) {
   function renderCategoryItem(itemData) {
@@ -19,8 +27,15 @@ function Home({ navigation }) {
     );
   }
   const [promo, setPromo] = useState(null);
+  const [refreshing, setRefreshing] = useState(false);
 
-  useEffect(() => {
+  const onRefresh = async () => {
+    console.log("onref");
+    loadPromo();
+  };
+
+  const loadPromo = async () => {
+    console.log("loadPromo");
     axios
       .post("http://10.0.2.2:1337/api/allpromo")
       .then((response) => {
@@ -35,19 +50,39 @@ function Home({ navigation }) {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  useEffect(() => {
+    loadPromo();
   }, []);
 
   return (
-    <View>
-      <Text>News Promotions & more</Text>
-      <FlatList
-        // data={promo}
-        data={NEWS}
-        keyExtractor={(item) => item.id}
-        renderItem={renderCategoryItem}
-        numColumns={1}
-      ></FlatList>
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView
+        style={{ flex: 1 }}
+        refreshControl={
+          <RefreshControl
+            color={"black"}
+            tintColor={"#FFFFF"}
+            refreshing={refreshing}
+            onRefresh={() => onRefresh()}
+          ></RefreshControl>
+        }
+      >
+        <Text>News Promotions & more</Text>
+        <View style={{ flex: 1 }}>
+          <FlatList
+            nestedScrollEnabled={true}
+            data={promo}
+            // data={NEWS}
+            keyExtractor={(item) => item.id}
+            renderItem={renderCategoryItem}
+            numColumns={1}
+            // horizontal={true}
+          ></FlatList>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
