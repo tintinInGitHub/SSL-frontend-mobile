@@ -52,7 +52,10 @@ function NewsDetail({ route, navigation }) {
     if (!like) {
       setLiked(!like);
       axios
-        .post("http://10.0.2.2:1337/api/liked", { promo: news.id, user: 1111 })
+        .post("http://10.0.2.2:1337/api/promo-like/liked", {
+          promo: news.id,
+          user: 1111,
+        })
         .then((response) => {})
         .catch((error) => {
           console.log(error);
@@ -60,7 +63,7 @@ function NewsDetail({ route, navigation }) {
     } else {
       setLiked(null);
       axios
-        .post("http://10.0.2.2:1337/api/unliked", {
+        .post("http://10.0.2.2:1337/api/promo-like/unliked", {
           promo: news.id,
           user: 1111,
         })
@@ -106,7 +109,10 @@ function NewsDetail({ route, navigation }) {
   const loadLike = async () => {
     console.log("loadLike");
     axios
-      .post("http://10.0.2.2:1337/api/isLiked", { id: news.id, user: 1111 })
+      .post("http://10.0.2.2:1337/api/promo-like/isLiked", {
+        id: news.id,
+        user: 1111,
+      })
       .then((response) => {
         console.log(response.data.liked);
         setLiked(response.data.liked);

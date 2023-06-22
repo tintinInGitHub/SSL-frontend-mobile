@@ -37,7 +37,7 @@ function Home({ navigation }) {
   const loadPromo = async () => {
     console.log("loadPromo");
     axios
-      .post("http://10.0.2.2:1337/api/allpromo")
+      .post("http://10.0.2.2:1337/api/promo/allPromo")
       .then((response) => {
         // if (response.data && response.data[0]) {
         //   // setQuote(response.data[0].text);

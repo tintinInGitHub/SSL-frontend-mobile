@@ -2,6 +2,7 @@ import { View, Text, Button, TextInput, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
 import styles from "./styles";
 import { SelectList } from "react-native-dropdown-select-list";
+import axios from "axios";
 
 function Booking({ navigation, route }) {
   const [name, setName] = useState(route?.params?.name);
@@ -27,6 +28,22 @@ function Booking({ navigation, route }) {
   const onPressSubmit = () => {
     console.log("go");
     navigation.navigate("Home");
+    axios
+      .post("http://10.0.2.2:1337/api/booking/book", {
+        mobile: tel,
+        name: name,
+        tel: tel,
+        amount: 1,
+        user: 1111,
+      })
+      .then((response) => {
+        console.log(response.data.liked);
+        setLiked(response.data.liked);
+        console.log(liked);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   useEffect(() => {
     setDate(route?.params?.date);
@@ -34,7 +51,7 @@ function Booking({ navigation, route }) {
   return (
     <View>
       <Text>Branch (สาขา)</Text>
-      {/* <Text>{JSON.stringify(route.params.branch.title)}</Text> */}
+      <Text>{JSON.stringify(route.params.branch.name)}</Text>
       <Text>Name (ชื่อ)</Text>
       <TextInput
         style={styles.input}
@@ -69,12 +86,12 @@ function Booking({ navigation, route }) {
         />
       </TouchableOpacity>
       <Text>
-        {name}
+        {/* {name}
         {tel}
         {seat}
         {date}
         {JSON.stringify(route.params)}
-        {maxDate.toDateString}
+        {maxDate.toDateString} */}
       </Text>
       <Button
         onPress={onPressSubmit}
