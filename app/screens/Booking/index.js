@@ -9,6 +9,7 @@ function Booking({ navigation, route }) {
   const [tel, setTel] = useState(route?.params?.tel);
   const [seat, setSeat] = useState(route?.params?.seat);
   const [date, setDate] = useState(route?.params?.date);
+  const [branch, setBranch] = useState(route?.params?.branch?.id);
   const minDate = new Date();
   const maxDate = new Date(Date.now() + 3600 * 1000 * 24 * 60);
   const maxSeat = 30;
@@ -32,14 +33,12 @@ function Booking({ navigation, route }) {
       .post("http://10.0.2.2:1337/api/booking/book", {
         mobile: tel,
         name: name,
-        tel: tel,
-        amount: 1,
+        amount: seat,
         user: 1111,
+        branch: branch,
       })
       .then((response) => {
-        console.log(response.data.liked);
-        setLiked(response.data.liked);
-        console.log(liked);
+        console.log(response);
       })
       .catch((error) => {
         console.log(error);
