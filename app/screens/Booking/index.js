@@ -50,7 +50,7 @@ function Booking({ navigation, route }) {
   return (
     <View>
       <Text>Branch (สาขา)</Text>
-      <Text>{JSON.stringify(route.params.branch.name)}</Text>
+      <Text>{JSON.stringify(route?.params?.branch?.name)}</Text>
       <Text>Name (ชื่อ)</Text>
       <TextInput
         style={styles.input}

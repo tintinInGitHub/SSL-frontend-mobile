@@ -4,6 +4,7 @@ import styles from "./styles";
 import { SelectList } from "react-native-dropdown-select-list";
 import CalendarPicker from "react-native-calendar-picker";
 import axios from "axios";
+import { BaseColor } from "../../config/theme";
 
 function BookingDate({ navigation, route }) {
   const [name, setName] = useState(route?.params?.name);
@@ -16,22 +17,24 @@ function BookingDate({ navigation, route }) {
   const minDate = new Date();
   const maxDate = new Date(Date.now() + 3600 * 1000 * 24 * 60);
   let day = new Date("2023-06-19T00:00:00");
+  const [disabledDate, setDisabledDate] = useState([]);
   // let day = new Date(2023, 6, 19, 0, 0, 0);
   // let today = moment();
-  let customDatesStyles = [];
+  const [customDatesStyles, setCustomDatesStyles] = useState([]);
+  // let customDatesStyles = [];
   // while (day.add(1, "day").isSame(today, "month")) {
-  customDatesStyles.push({
-    date: day,
-    // Random colors
-    style: {
-      backgroundColor:
-        "#" +
-        ("#00000" + ((Math.random() * (1 << 24)) | 0).toString(16)).slice(-6),
-    },
-    textStyle: { color: "black" }, // sets the font color
-    containerStyle: [], // extra styling for day container
-    allowDisabled: true, // allow custom style to apply to disabled dates
-  });
+  // customDatesStyles.push({
+  //   date: day,
+  //   // Random colors
+  //   style: {
+  //     backgroundColor:
+  //       "#" +
+  //       ("#00000" + ((Math.random() * (1 << 24)) | 0).toString(16)).slice(-6),
+  //   },
+  //   textStyle: { color: "black" }, // sets the font color
+  //   containerStyle: [], // extra styling for day container
+  //   allowDisabled: true, // allow custom style to apply to disabled dates
+  // });
   // }
   const onDateChange = (date) => {
     console.log(date);
@@ -44,6 +47,16 @@ function BookingDate({ navigation, route }) {
       seat: seat,
       name: name,
     });
+  };
+  const getbackColor = (type) => {
+    if (type == "Holiday") {
+      return BaseColor.sakuraColor;
+    }
+    if (type == "Full") {
+      return BaseColor.redColor;
+    } else {
+      return BaseColor.grayColor;
+    }
   };
 
   const loadSpecialDay = async (type) => {
@@ -58,7 +71,34 @@ function BookingDate({ navigation, route }) {
         // } else {
         //   console.log("No quote found in response");
         // }
+        // setHoliday(response.data);
         console.log(response.data);
+        let cl = getbackColor(type);
+        let styleArr = [];
+        let disArr = [];
+        for (let i = 0; i < response.data?.length; i++) {
+          let strDay = response?.data?.[i].date.concat("T00:00:00");
+          console.log(strDay);
+          let spDay = new Date(strDay);
+          disArr.push(spDay);
+          styleArr.push({
+            date: spDay,
+            // Random colors
+            style: {
+              backgroundColor: cl,
+            },
+            textStyle: { color: "black" }, // sets the font color
+            containerStyle: [], // extra styling for day container
+            allowDisabled: true, // allow custom style to apply to disabled dates
+          });
+        }
+        setCustomDatesStyles((customDatesStyles) => [
+          ...customDatesStyles,
+          ...styleArr,
+        ]);
+        setDisabledDate((disabledDate) => [...disabledDate, ...disArr]);
+        // setCustomDatesStyles(customDatesStyles.concat(styleArr));
+        console.log(customDatesStyles);
         return response.data;
       })
       .catch((error) => {
@@ -76,7 +116,7 @@ function BookingDate({ navigation, route }) {
     <View>
       <Text>Date (วันที่)</Text>
       <CalendarPicker
-        disabledDates={[day]}
+        disabledDates={disabledDate}
         customDatesStyles={customDatesStyles}
         onDateChange={onDateChange}
         selectedDayColor="#7300e6"
@@ -89,11 +129,14 @@ function BookingDate({ navigation, route }) {
           color: "#000000",
         }}
       />
-      <Text>
+      <Text style={{ color: BaseColor.sakuraColor }}>
         {/* {date} */}
         {/* {maxDate.toDateString} */}
         {/* {JSON.stringify(route)} */}
+        Holiday
       </Text>
+      <Text style={{ color: BaseColor.redColor }}>Full</Text>
+      <Text style={{ color: BaseColor.grayColorColor }}>Event</Text>
     </View>
   );
 }
