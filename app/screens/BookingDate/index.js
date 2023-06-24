@@ -18,24 +18,9 @@ function BookingDate({ navigation, route }) {
   const maxDate = new Date(Date.now() + 3600 * 1000 * 24 * 60);
   let day = new Date("2023-06-19T00:00:00");
   const [disabledDate, setDisabledDate] = useState([]);
-  // let day = new Date(2023, 6, 19, 0, 0, 0);
-  // let today = moment();
+
   const [customDatesStyles, setCustomDatesStyles] = useState([]);
-  // let customDatesStyles = [];
-  // while (day.add(1, "day").isSame(today, "month")) {
-  // customDatesStyles.push({
-  //   date: day,
-  //   // Random colors
-  //   style: {
-  //     backgroundColor:
-  //       "#" +
-  //       ("#00000" + ((Math.random() * (1 << 24)) | 0).toString(16)).slice(-6),
-  //   },
-  //   textStyle: { color: "black" }, // sets the font color
-  //   containerStyle: [], // extra styling for day container
-  //   allowDisabled: true, // allow custom style to apply to disabled dates
-  // });
-  // }
+
   const onDateChange = (date) => {
     console.log(date);
     console.log(day.toString());
@@ -66,12 +51,6 @@ function BookingDate({ navigation, route }) {
         type: type,
       })
       .then((response) => {
-        // if (response.data && response.data[0]) {
-        //   // setQuote(response.data[0].text);
-        // } else {
-        //   console.log("No quote found in response");
-        // }
-        // setHoliday(response.data);
         console.log(response.data);
         let cl = getbackColor(type);
         let styleArr = [];

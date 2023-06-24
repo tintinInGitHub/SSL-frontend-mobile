@@ -17,11 +17,6 @@ function Booking({ navigation, route }) {
   const data = Array(maxSeat - minSeat + 1)
     .fill()
     .map(() => minSeat++);
-  const onDateChange = (date) => {
-    console.log(date);
-    var dateI = new Date(date);
-    setDate(dateI.toDateString());
-  };
   const goBookingDate = () => {
     console.log("go");
     navigation.navigate("BookingDate", { tel: tel, seat: seat, name: name });
@@ -36,6 +31,7 @@ function Booking({ navigation, route }) {
         amount: seat,
         user: 1111,
         branch: branch,
+        date: date,
       })
       .then((response) => {
         console.log(response);
