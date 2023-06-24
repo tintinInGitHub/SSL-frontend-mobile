@@ -8,6 +8,7 @@ import {
   RefreshControl,
 } from "react-native";
 import CategoryGridTile from "../../components/CategoryGridTile";
+import BookingList from "../../components/BookingList";
 import { FlatList } from "react-native";
 import { BRANCH, CATEGORIES } from "../../data/dummy.js";
 import Icon from "../../components/Icon/index";
@@ -16,17 +17,18 @@ import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import axios from "axios";
 
-function BranchBook({ navigation }) {
+function BookHistory({ navigation }) {
   function renderBranchyItem(itemData) {
     function pressHandler() {
       navigation.navigate("Booking", { branch: itemData.item });
     }
     return (
-      <CategoryGridTile
+      <BookingList
         title={
-          itemData.item.open == true
-            ? itemData.item.name
-            : itemData.item.name.concat(" : Coming Soon")
+          // itemData.item.open == true
+          // ?
+          itemData.item.user
+          // : itemData.item.name.concat(" : Coming Soon")
         }
         color={
           itemData.item.open == true ? itemData.item.color : BaseColor.grayColor
@@ -40,7 +42,7 @@ function BranchBook({ navigation }) {
   const loadBranch = async () => {
     // console.log("loadBranch");
     axios
-      .post("http://10.0.2.2:1337/api/branch/allBranch")
+      .post("http://10.0.2.2:1337/api/booking/getBook", { user: 1111 })
       .then((response) => {
         console.log(response.data);
         setBranch(response.data);
@@ -83,9 +85,6 @@ function BranchBook({ navigation }) {
             />
           );
         }}
-        onPressRight={() => {
-          navigation.navigate("BookHistory");
-        }}
         onPressLeft={() => {
           navigation.goBack();
         }}
@@ -114,4 +113,4 @@ function BranchBook({ navigation }) {
   );
 }
 
-export default BranchBook;
+export default BookHistory;

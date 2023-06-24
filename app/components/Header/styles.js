@@ -1,9 +1,14 @@
 import React from "react";
 import { StyleSheet, I18nManager } from "react-native";
+import { BaseColor } from "../../config/theme";
 // import { BaseStyle } from "@config";
 
 export default StyleSheet.create({
-  contain: { height: 45, flexDirection: "row" },
+  contain: {
+    height: 45,
+    flexDirection: "row",
+    backgroundColor: BaseColor.redColor,
+  },
   contentLeft: {
     flex: 1,
     justifyContent: "center",

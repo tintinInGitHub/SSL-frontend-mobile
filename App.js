@@ -14,6 +14,7 @@ import Tabs from "./app/navigation/tabs.js";
 import BranchBook from "./app/screens/BranchBook/index.js";
 import Booking from "./app/screens/Booking/index.js";
 import BookingDate from "./app/screens/BookingDate/index.js";
+import BookHistory from "./app/screens/BookHistory/index.js";
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +30,7 @@ export default function App() {
             contentStyle: {
               // backgroundColor: "#24180F",
             },
+            // headerShown: false,
           }}
         >
           <Stack.Screen
@@ -47,6 +49,10 @@ export default function App() {
             component={FoodListByCat}
           ></Stack.Screen>
           <Stack.Screen name="BranchBook" component={BranchBook}></Stack.Screen>
+          <Stack.Screen
+            name="BookHistory"
+            component={BookHistory}
+          ></Stack.Screen>
           <Stack.Screen name="Booking" component={Booking}></Stack.Screen>
           <Stack.Screen
             name="BookingDate"

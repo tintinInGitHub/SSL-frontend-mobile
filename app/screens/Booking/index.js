@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import styles from "./styles";
 import { SelectList } from "react-native-dropdown-select-list";
 import axios from "axios";
+import Header from "../../components/Header";
+import Icon from "../../components/Icon/index";
+import { BaseColor } from "../../config/theme";
 
 function Booking({ navigation, route }) {
   const [name, setName] = useState(route?.params?.name);
@@ -44,7 +47,23 @@ function Booking({ navigation, route }) {
     setDate(route?.params?.date);
   });
   return (
-    <View>
+    <View style={styles.container}>
+      <Header
+        title={""}
+        renderLeft={() => {
+          return (
+            <Icon
+              name="arrow-left"
+              size={20}
+              color={BaseColor.sakuraColor}
+              enableRTL={true}
+            />
+          );
+        }}
+        onPressLeft={() => {
+          navigation.goBack();
+        }}
+      />
       <Text>Branch (สาขา)</Text>
       <Text>{JSON.stringify(route?.params?.branch?.name)}</Text>
       <Text>Name (ชื่อ)</Text>

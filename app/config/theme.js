@@ -4,4 +4,5 @@ export const BaseColor = {
   whiteColor: "#FFFFFF",
   sakuraColor: "#FFB7C5",
   redColor: "#F0706A",
+  darkModeColor: "#343434",
 };

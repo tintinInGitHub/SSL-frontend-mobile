@@ -51,6 +51,7 @@ function Tabs() {
           height: 90,
           ...styles.shadow,
         },
+        headerShown: false,
       }}
     >
       <Tab.Screen
