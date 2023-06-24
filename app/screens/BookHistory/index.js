@@ -24,12 +24,17 @@ function BookHistory({ navigation }) {
     }
     return (
       <BookingList
-        title={
+        amount={
           // itemData.item.open == true
           // ?
-          itemData.item.user
+          itemData.item.amount
           // : itemData.item.name.concat(" : Coming Soon")
         }
+        ref={itemData?.item?.ref}
+        name={itemData?.item?.name}
+        branch={itemData?.item?.branch?.name}
+        id={itemData?.item?.id}
+        status={itemData?.item?.status}
         color={
           itemData.item.open == true ? itemData.item.color : BaseColor.grayColor
         }

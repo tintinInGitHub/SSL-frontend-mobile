@@ -17,7 +17,7 @@ export default StyleSheet.create({
   },
   innerContainer: {
     flex: 1,
-    padding: 24,
+    paddingTop: 18,
     flexDirection: "row",
     flexWrap: "wrap",
     alignItems: "flex-start", // if you want to fill rows left to right
@@ -28,10 +28,16 @@ export default StyleSheet.create({
   title: {
     fontWeight: "bold",
     fontSize: 18,
+    padding: 4,
     textAlign: "center",
     width: "50%",
   },
   buttonPressed: {
     opacity: 0.5,
+  },
+  del: {
+    position: "absolute",
+    right: 8,
+    top: 4,
   },
 });
