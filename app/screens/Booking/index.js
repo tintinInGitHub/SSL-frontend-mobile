@@ -22,7 +22,12 @@ function Booking({ navigation, route }) {
     .map(() => minSeat++);
   const goBookingDate = () => {
     console.log("go");
-    navigation.navigate("BookingDate", { tel: tel, seat: seat, name: name });
+    navigation.navigate("BookingDate", {
+      tel: tel,
+      seat: seat,
+      name: name,
+      branch: route?.params?.branch,
+    });
   };
   const onPressSubmit = () => {
     console.log("go");

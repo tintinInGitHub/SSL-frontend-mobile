@@ -38,10 +38,25 @@ function BookHistory({ navigation }) {
         color={
           itemData.item.open == true ? itemData.item.color : BaseColor.grayColor
         }
-        onPress={itemData.item.open == true ? pressHandler : null}
+        // onPress={itemData.item.open == true ? pressHandler : null}
+        onPress={() => onDel(itemData?.item?.id)}
       />
     );
   }
+  const onDel = async (id) => {
+    console.log("onref");
+    axios
+      .post("http://10.0.2.2:1337/api/booking/delBook", {
+        id: id,
+      })
+      .then((response) => {
+        console.log(response.data);
+        loadBranch();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const [refreshing, setRefreshing] = useState(false);
   const [branch, setBranch] = useState(null);
   const loadBranch = async () => {

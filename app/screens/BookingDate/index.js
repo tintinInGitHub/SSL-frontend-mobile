@@ -10,6 +10,7 @@ function BookingDate({ navigation, route }) {
   const [name, setName] = useState(route?.params?.name);
   const [tel, setTel] = useState(route?.params?.tel);
   const [seat, setSeat] = useState(route?.params?.seat);
+  const [branch, setBranch] = useState(route?.params?.branch);
   const [date, setDate] = useState(null);
   const [holiday, setHoliday] = useState(null);
   const [event, setEvent] = useState(null);
@@ -31,6 +32,7 @@ function BookingDate({ navigation, route }) {
       tel: tel,
       seat: seat,
       name: name,
+      branch: branch,
     });
   };
   const getbackColor = (type) => {
@@ -49,6 +51,7 @@ function BookingDate({ navigation, route }) {
     axios
       .post("http://10.0.2.2:1337/api/special-day/loadSpecialDay", {
         type: type,
+        branch: branch?.id,
       })
       .then((response) => {
         console.log(response.data);

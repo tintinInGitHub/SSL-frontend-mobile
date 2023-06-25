@@ -14,19 +14,6 @@ function BookingList({
   color,
   onPress,
 }) {
-  const onDel = async () => {
-    console.log("onref");
-    axios
-      .post("http://10.0.2.2:1337/api/booking/delBook", { id: id })
-      .then((response) => {
-        console.log(response.data);
-        // setBranch(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    // loadBranch();
-  };
   return (
     <View style={[styles.gridItem]}>
       {/* <Pressable
@@ -44,7 +31,7 @@ function BookingList({
           size={20}
           style={styles.del}
           color={BaseColor.sakuraColor}
-          onPress={onDel}
+          onPress={onPress}
           // enableRTL={true}
         />
         <Text style={styles.title}>Reference : {refer}</Text>
