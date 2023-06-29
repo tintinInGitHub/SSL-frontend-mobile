@@ -13,7 +13,7 @@ const Tab = createBottomTabNavigator();
 const CustomTabBarButton = ({ children, onPress }) => (
   <TouchableOpacity
     style={{
-      top: -20,
+      top: -17,
       justifyContent: "center",
       alignItems: "center",
       ...styles.shadow,
@@ -22,9 +22,9 @@ const CustomTabBarButton = ({ children, onPress }) => (
   >
     <View
       style={{
-        width: 90,
-        height: 90,
-        borderRadius: 45,
+        width: 100,
+        height: 100,
+        borderRadius: 50,
         backgroundColor: "#e32f45",
       }}
     >
@@ -48,7 +48,7 @@ function Tabs() {
           elevation: 0,
           backgroundColor: "#ffffff",
           borderRadius: 15,
-          height: 90,
+          height: 75,
           ...styles.shadow,
         },
         headerShown: false,
@@ -87,8 +87,8 @@ function Tabs() {
               source={require("../../assets/glass-martini-alt-solid.png")}
               resizeMode="contain"
               style={{
-                width: 36,
-                height: 36,
+                width: 44,
+                height: 44,
                 tintColor: "#fff",
               }}
             ></Image>

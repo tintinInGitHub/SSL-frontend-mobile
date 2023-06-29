@@ -32,6 +32,7 @@ function BranchBook({ navigation }) {
           itemData.item.open == true ? itemData.item.color : BaseColor.grayColor
         }
         onPress={itemData.item.open == true ? pressHandler : null}
+        banner={itemData.item.banner != null ? itemData.item.banner.url : null}
       />
     );
   }
@@ -42,7 +43,9 @@ function BranchBook({ navigation }) {
     axios
       .post("http://10.0.2.2:1337/api/branch/allBranch")
       .then((response) => {
-        console.log(response.data);
+        console.log(
+          "http://localhost:1337".concat(response.data[0].banner.url)
+        );
         setBranch(response.data);
       })
       .catch((error) => {
@@ -91,7 +94,7 @@ function BranchBook({ navigation }) {
         }}
       />
       <ScrollView
-        style={{ flex: 1, paddingBottom: 100 }}
+        style={{ flex: 1 }}
         refreshControl={
           <RefreshControl
             color={"black"}
@@ -101,7 +104,12 @@ function BranchBook({ navigation }) {
           ></RefreshControl>
         }
       >
-        <View style={{ backgroundColor: BaseColor.darkModeColor }}>
+        <View
+          style={{
+            backgroundColor: BaseColor.darkModeColor,
+            paddingBottom: 100,
+          }}
+        >
           <FlatList
             data={branch}
             keyExtractor={(item) => item.id}

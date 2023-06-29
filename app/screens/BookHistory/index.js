@@ -95,16 +95,6 @@ function BookHistory({ navigation }) {
             />
           );
         }}
-        renderRight={() => {
-          return (
-            <Icon
-              name="history"
-              size={20}
-              color={BaseColor.sakuraColor}
-              enableRTL={true}
-            />
-          );
-        }}
         onPressLeft={() => {
           navigation.goBack();
         }}

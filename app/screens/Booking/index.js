@@ -1,4 +1,11 @@
-import { View, Text, Button, TextInput, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Button,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import { useEffect, useState } from "react";
 import styles from "./styles";
 import { SelectList } from "react-native-dropdown-select-list";
@@ -118,6 +125,12 @@ function Booking({ navigation, route }) {
         color="#841584"
         accessibilityLabel="Book button"
       />
+      <Image
+        source={{
+          uri: "https://images.unsplash.com/photo-1526045612212-70caf35c14df",
+        }}
+        style={{ height: 1000 ,width:1000}}
+      ></Image>
     </View>
   );
 }
