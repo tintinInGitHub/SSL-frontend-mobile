@@ -107,7 +107,7 @@ function BranchBook({ navigation }) {
         <View
           style={{
             backgroundColor: BaseColor.darkModeColor,
-            paddingBottom: 100,
+            // paddingBottom: 100,
           }}
         >
           <FlatList
@@ -115,6 +115,7 @@ function BranchBook({ navigation }) {
             keyExtractor={(item) => item.id}
             renderItem={renderBranchyItem}
             numColumns={1}
+            contentContainerStyle={{ paddingBottom: 100 }}
           ></FlatList>
         </View>
       </ScrollView>

@@ -7,7 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import FoodDetail from "./app/screens/FoodDetail/index.js";
-import FoodCategories from "./app/screens/FoodCategories/index.js";
+import OrderHome from "./app/screens/OrderHome/index.js";
 import FoodListByCat from "./app/screens/FoodListByCat/index.js";
 import NewsDetail from "./app/screens/NewsDetail/index.js";
 import Tabs from "./app/navigation/tabs.js";
@@ -38,10 +38,7 @@ export default function App() {
             component={Tabs}
           ></Stack.Screen>
           {/* <Stack.Screen name="Home" component={Home}></Stack.Screen> */}
-          <Stack.Screen
-            name="FoodCategories"
-            component={FoodCategories}
-          ></Stack.Screen>
+          <Stack.Screen name="OrderHome" component={OrderHome}></Stack.Screen>
           <Stack.Screen name="NewsDetail" component={NewsDetail}></Stack.Screen>
           <Stack.Screen name="FoodDetail" component={FoodDetail}></Stack.Screen>
           <Stack.Screen

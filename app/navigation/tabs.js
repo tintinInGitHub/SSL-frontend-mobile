@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import FoodDetail from "../screens/FoodDetail";
-import FoodCategories from "../screens/FoodCategories";
+import OrderHome from "../screens/OrderHome";
 import FoodListByCat from "../screens/FoodListByCat";
 import NewsDetail from "../screens/NewsDetail";
 import styles from "./style";
@@ -79,8 +79,8 @@ function Tabs() {
         }}
       ></Tab.Screen>
       <Tab.Screen
-        name="FoodCategories"
-        component={FoodCategories}
+        name="OrderHome"
+        component={OrderHome}
         options={{
           tabBarIcon: ({ focused }) => (
             <Image
