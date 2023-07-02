@@ -1,26 +1,52 @@
-import { View, Text, Pressable, Image } from "react-native";
+import { Pressable, View, Text, Image, ImageBackground } from "react-native";
 import styles from "./styles";
+import { BaseColor } from "../../config/theme";
 
-function FoodItem({ title, imageUrl, onPress }) {
+function FoodItem({
+  name,
+  calories,
+  price,
+  description,
+  onPress,
+  avaiable,
+  banner,
+}) {
   return (
-    <View>
-      <Pressable
-        android_ripple={{ color: "#ccc" }}
-        style={({ pressed }) => [
-          styles.button,
-          pressed ? styles.buttonPressed : null,
-        ]}
-        onPress={onPress}
+    <View style={[styles.gridItem]}>
+      <ImageBackground
+        source={{
+          // uri: "https://localhost:1337/".concat(banner),
+          uri: "http://localhost:1337/uploads/2_1_9c7f565632.png",
+          width: 320,
+          height: 320,
+        }}
+        resizeMode="cover"
+        style={{ flex: 1, justifyContent: "center" }}
       >
-        <View>
-          <Image
-            style={styles.image}
-            source={{ uri: imageUrl, width: 32, height: 32 }}
-          />
-
-          <Text style={styles.title}>{title}</Text>
-        </View>
-      </Pressable>
+        <Pressable
+          android_ripple={{ color: "#ccc" }}
+          style={({ pressed }) => [
+            styles.button,
+            pressed ? styles.buttonPressed : null,
+          ]}
+          onPress={onPress}
+        >
+          <View
+            style={[
+              styles.innerContainer,
+              { backgroundColor: BaseColor.darkModeColor },
+            ]}
+          >
+            <Text style={styles.title}>
+              {name}
+              {calories}
+              {description}
+              {price}
+              {avaiable}
+            </Text>
+          </View>
+        </Pressable>
+      </ImageBackground>
     </View>
   );
 }

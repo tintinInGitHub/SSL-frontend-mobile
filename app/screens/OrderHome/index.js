@@ -6,14 +6,13 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import CategoryGridTile from "../../components/CategoryGridTile";
 import { FlatList } from "react-native";
-import { CATEGORIES } from "../../data/dummy.js";
 import { BaseColor } from "../../config/theme";
 import Icon from "../../components/Icon/index";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Header from "../../components/Header";
+import FoodItem from "../../components/FoodItem";
 
 function OrderHome({ navigation }) {
   function renderCategoryItem(itemData) {
@@ -21,9 +20,12 @@ function OrderHome({ navigation }) {
       navigation.navigate("FoodListByCat", { categoryId: itemData.item.id });
     }
     return (
-      <CategoryGridTile
-        title={itemData.item.name}
-        color={itemData.item.color}
+      <FoodItem
+        name={itemData.item.name}
+        price={itemData.item.price}
+        description={itemData.item.description}
+        calories={itemData.item.calories}
+        avaiable={itemData.item.avaiable.toString()}
         onPress={pressHandler}
       />
     );
@@ -43,12 +45,6 @@ function OrderHome({ navigation }) {
     axios
       .post("http://10.0.2.2:1337/api/food-type/loadFoodType")
       .then((response) => {
-        // if (response.data && response.data[0]) {
-        //   // setQuote(response.data[0].text);
-        // } else {
-        //   console.log("No quote found in response");
-        // }
-        // console.log(response.data);
         setFoodType(response.data);
       })
       .catch((error) => {
@@ -64,23 +60,18 @@ function OrderHome({ navigation }) {
         keyword: keyword,
       })
       .then((response) => {
-        // if (response.data && response.data[0]) {
-        //   // setQuote(response.data[0].text);
-        // } else {
-        //   console.log("No quote found in response");
-        // }
         console.log(response.data);
         setFood(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
   useEffect(() => {
     loadFoodType();
     loadFood();
-  }, [keyword]);
+  }, [keyword, selectedMenu]);
 
   function renderSearch() {
     return (
@@ -202,16 +193,8 @@ function OrderHome({ navigation }) {
     );
   }
 
-  return (
-    <View
-      style={{
-        backgroundColor: BaseColor.redColor,
-      }}
-    >
-      {renderHeader()}
-      {renderSearch()}
-      {renderFoodType()}
-
+  function renderFoodList() {
+    return (
       <FlatList
         data={food}
         keyExtractor={(item) => item.id}
@@ -219,6 +202,20 @@ function OrderHome({ navigation }) {
         numColumns={1}
         contentContainerStyle={{ paddingBottom: 260 }}
       ></FlatList>
+    );
+  }
+
+  return (
+    <View
+      style={{
+        backgroundColor: BaseColor.redColor,
+        flex: 1,
+      }}
+    >
+      {renderHeader()}
+      {renderSearch()}
+      {renderFoodType()}
+      {renderFoodList()}
     </View>
   );
 }
