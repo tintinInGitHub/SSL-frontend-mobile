@@ -13,11 +13,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import FoodItem from "../../components/FoodItem";
+import { FAB } from "@rneui/themed";
 
 function OrderHome({ navigation }) {
   function renderCategoryItem(itemData) {
-    function pressHandler() {
-      navigation.navigate("FoodListByCat", { categoryId: itemData.item.id });
+    function pressHandler(item) {
+      // navigation.navigate("FoodListByCat", { categoryId: itemData.item.id });
+      setCart([...cart, item]);
+      console.log(cart);
     }
     return (
       <FoodItem
@@ -26,12 +29,13 @@ function OrderHome({ navigation }) {
         description={itemData.item.description}
         calories={itemData.item.calories}
         avaiable={itemData.item.avaiable.toString()}
-        onPress={pressHandler}
+        onPress={() => pressHandler(itemData.item)}
       />
     );
   }
 
   const [foodType, setFoodType] = useState(null);
+  const [cart, setCart] = useState([]);
   const [food, setFood] = useState(null);
   const [keyword, setKeyword] = useState(null);
   const [selectedMenu, setSelectedMenu] = useState(1);
@@ -216,6 +220,16 @@ function OrderHome({ navigation }) {
       {renderSearch()}
       {renderFoodType()}
       {renderFoodList()}
+      <FAB
+        style={{ paddingBottom: 120, left: 150 }}
+        icon={{ name: "shopping-basket", color: "white" }}
+        size="small"
+        // onPress={}
+      >
+        <Text style={{ position: "absolute", color: BaseColor.sakuraColor }}>
+          xxxx
+        </Text>
+      </FAB>
     </View>
   );
 }
