@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  Button,
 } from "react-native";
 import { FlatList } from "react-native";
 import { BaseColor } from "../../config/theme";
@@ -14,6 +15,8 @@ import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import FoodItem from "../../components/FoodItem";
 import { FAB } from "@rneui/themed";
+import Modal from "react-native-modal";
+import styles from "./styles";
 
 function OrderHome({ navigation }) {
   function renderCategoryItem(itemData) {
@@ -34,6 +37,10 @@ function OrderHome({ navigation }) {
     );
   }
 
+  const [isModalVisible, setModalVisible] = useState(false);
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
   const [foodType, setFoodType] = useState(null);
   const [cart, setCart] = useState([]);
   const [food, setFood] = useState(null);
@@ -209,6 +216,45 @@ function OrderHome({ navigation }) {
     );
   }
 
+  function renderModal() {
+    return (
+      <View>
+        <FAB
+          style={{ paddingBottom: 120, left: 150 }}
+          icon={{ name: "shopping-basket", color: "white", size: 25 }}
+          size="medium"
+          onPress={toggleModal}
+        >
+          <View style={styles.containerCircle}>
+            <Text
+              style={{
+                // position: "absolute",
+                color: BaseColor.sakuraColor,
+                fontSize: 12,
+                // backgroundColor: BaseColor.darkModeColor,
+              }}
+            >
+              {cart.length}
+            </Text>
+          </View>
+        </FAB>
+        <Modal isVisible={isModalVisible}>
+          <View style={{ flex: 1 }}>
+            {/* <Text>{JSON.stringify(cart)}</Text> */}
+            <FlatList
+              data={cart}
+              keyExtractor={(item) => item.id}
+              renderItem={renderCategoryItem}
+              numColumns={1}
+              contentContainerStyle={{ paddingBottom: 260 }}
+            ></FlatList>
+            <Button title="Hide modal" onPress={toggleModal} />
+          </View>
+        </Modal>
+      </View>
+    );
+  }
+
   return (
     <View
       style={{
@@ -220,16 +266,7 @@ function OrderHome({ navigation }) {
       {renderSearch()}
       {renderFoodType()}
       {renderFoodList()}
-      <FAB
-        style={{ paddingBottom: 120, left: 150 }}
-        icon={{ name: "shopping-basket", color: "white" }}
-        size="small"
-        // onPress={}
-      >
-        <Text style={{ position: "absolute", color: BaseColor.sakuraColor }}>
-          xxxx
-        </Text>
-      </FAB>
+      {renderModal()}
     </View>
   );
 }
