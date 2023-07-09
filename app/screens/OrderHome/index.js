@@ -50,6 +50,11 @@ function OrderHome({ navigation }) {
     console.log("onref");
     loadFoodType();
   };
+  const sendOrder = () => {
+    //sendAPIOrder
+    setCart([]);
+    toggleModal();
+  };
 
   const loadFoodType = async () => {
     // console.log("loadFoodType");
@@ -238,9 +243,21 @@ function OrderHome({ navigation }) {
             </Text>
           </View>
         </FAB>
-        <Modal isVisible={isModalVisible}>
+        <Modal
+          backdropOpacity={0.9}
+          backdropColor={BaseColor.sakuraColor}
+          isVisible={isModalVisible}
+        >
           <View style={{ flex: 1 }}>
             {/* <Text>{JSON.stringify(cart)}</Text> */}
+            <Icon
+              name="times"
+              size={20}
+              color={BaseColor.darkModeColor}
+              enableRTL={true}
+              style={{ position: "absolute", right: -4 }}
+              onPress={toggleModal}
+            ></Icon>
             <FlatList
               data={cart}
               keyExtractor={(item) => item.id}
@@ -248,7 +265,7 @@ function OrderHome({ navigation }) {
               numColumns={1}
               contentContainerStyle={{ paddingBottom: 260 }}
             ></FlatList>
-            <Button title="Hide modal" onPress={toggleModal} />
+            <Button title="Order" onPress={sendOrder} />
           </View>
         </Modal>
       </View>
