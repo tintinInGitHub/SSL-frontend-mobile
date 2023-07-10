@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   TextInput,
   Button,
+  ScrollView,
+  RefreshControl,
 } from "react-native";
 import { FlatList } from "react-native";
 import { BaseColor } from "../../config/theme";
@@ -22,7 +24,7 @@ function OrderHome({ navigation }) {
   function renderCategoryItem(itemData) {
     function pressHandler(item) {
       // navigation.navigate("FoodListByCat", { categoryId: itemData.item.id });
-      setCart([...cart, item]);
+      setCart([...cart, item.name]);
       console.log(cart);
     }
     return (
@@ -31,7 +33,7 @@ function OrderHome({ navigation }) {
         price={itemData.item.price}
         description={itemData.item.description}
         calories={itemData.item.calories}
-        avaiable={itemData.item.avaiable.toString()}
+        avaiable={itemData.item.avaiable}
         onPress={() => pressHandler(itemData.item)}
       />
     );
@@ -46,12 +48,26 @@ function OrderHome({ navigation }) {
   const [food, setFood] = useState(null);
   const [keyword, setKeyword] = useState(null);
   const [selectedMenu, setSelectedMenu] = useState(1);
+  const [refreshing, setRefreshing] = useState(false);
   const onRefresh = async () => {
     console.log("onref");
     loadFoodType();
+    loadFood();
   };
-  const sendOrder = () => {
+  const sendOrder = async () => {
     //sendAPIOrder
+    await axios
+      .post("http://10.0.2.2:1337/api/order/addOrder", {
+        user: "111111111",
+        branch: 1,
+        foodOrder: cart,
+      })
+      .then((response) => {
+        // setFoodType(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     setCart([]);
     toggleModal();
   };
@@ -211,13 +227,32 @@ function OrderHome({ navigation }) {
 
   function renderFoodList() {
     return (
-      <FlatList
-        data={food}
-        keyExtractor={(item) => item.id}
-        renderItem={renderCategoryItem}
-        numColumns={1}
-        contentContainerStyle={{ paddingBottom: 260 }}
-      ></FlatList>
+      <ScrollView
+        style={{ flex: 1 }}
+        refreshControl={
+          <RefreshControl
+            color={"black"}
+            tintColor={"#FFFFF"}
+            refreshing={refreshing}
+            onRefresh={() => onRefresh()}
+          ></RefreshControl>
+        }
+      >
+        <View
+          style={{
+            backgroundColor: BaseColor.darkModeColor,
+            // paddingBottom: 100,
+          }}
+        >
+          <FlatList
+            data={food}
+            keyExtractor={(item) => item.id}
+            renderItem={renderCategoryItem}
+            numColumns={1}
+            contentContainerStyle={{ paddingBottom: 260 }}
+          ></FlatList>
+        </View>
+      </ScrollView>
     );
   }
 
