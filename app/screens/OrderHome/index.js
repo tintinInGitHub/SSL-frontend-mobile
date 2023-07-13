@@ -23,9 +23,7 @@ import styles from "./styles";
 function OrderHome({ navigation }) {
   function renderCategoryItem(itemData) {
     function pressHandler(item) {
-      // navigation.navigate("FoodListByCat", { categoryId: itemData.item.id });
-      setCart([...cart, item.name]);
-      console.log(cart);
+      setCart([...cart, item]);
     }
     return (
       <FoodItem
@@ -40,31 +38,44 @@ function OrderHome({ navigation }) {
   }
 
   const [isModalVisible, setModalVisible] = useState(false);
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
+
   const [foodType, setFoodType] = useState(null);
   const [cart, setCart] = useState([]);
   const [food, setFood] = useState(null);
   const [keyword, setKeyword] = useState(null);
   const [selectedMenu, setSelectedMenu] = useState(1);
   const [refreshing, setRefreshing] = useState(false);
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+  const clearCart = () => {
+    setCart([]);
+  };
   const onRefresh = async () => {
     console.log("onref");
     loadFoodType();
     loadFood();
   };
   const sendOrder = async () => {
-    //sendAPIOrder
+    var arr = {};
+    cart.map((x) => {
+      console.log(x);
+      if (typeof arr[x.id] == "undefined") arr[x.id] = 0;
+      arr[x.id]++;
+    });
+    // console.log(JSON.stringify(arr));
+    const result = Object.keys(arr).map((key) => ({
+      food_and_drinks: key,
+      quantity: arr[key],
+    }));
+    // console.log(result);
     await axios
       .post("http://10.0.2.2:1337/api/order/addOrder", {
         user: "111111111",
         branch: 1,
-        foodOrder: cart,
+        listOrder: result,
       })
-      .then((response) => {
-        // setFoodType(response.data);
-      })
+      .then((response) => {})
       .catch((error) => {
         console.log(error);
       });
@@ -292,6 +303,14 @@ function OrderHome({ navigation }) {
               enableRTL={true}
               style={{ position: "absolute", right: -4 }}
               onPress={toggleModal}
+            ></Icon>
+            <Icon
+              name="trash"
+              size={20}
+              color={BaseColor.darkModeColor}
+              enableRTL={true}
+              style={{ position: "absolute", left: -4 }}
+              onPress={clearCart}
             ></Icon>
             <FlatList
               data={cart}
