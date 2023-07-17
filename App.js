@@ -16,11 +16,16 @@ import Booking from "./app/screens/Booking/index.js";
 import BookingDate from "./app/screens/BookingDate/index.js";
 import BookHistory from "./app/screens/BookHistory/index.js";
 
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import rootReducer from "./app/stores/rootReducer.js";
 const Stack = createNativeStackNavigator();
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default function App() {
   return (
-    <>
+    <Provider store={store}>
       <StatusBar style="auto"></StatusBar>
       <NavigationContainer>
         {/* <Tabs /> */}
@@ -57,7 +62,7 @@ export default function App() {
           ></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
-    </>
+    </Provider>
   );
 }
 

@@ -15,10 +15,20 @@ import { BaseColor } from "../../config/theme";
 import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import axios from "axios";
+import { setSelectedBranch } from "../../stores/branch/branchActions";
+import { Store } from "redux";
+
+import { createStore, applyMiddleware } from "redux";
+import rootReducer from "../../stores/rootReducer";
+import thunk from "redux-thunk";
 
 function BranchBook({ navigation }) {
+  const store = createStore(rootReducer, applyMiddleware(thunk));
+
   function renderBranchyItem(itemData) {
     function pressHandler() {
+      setSelectedBranch(itemData.item);
+      alert(JSON.stringify(store.getState()));
       navigation.navigate("Booking", { branch: itemData.item });
     }
     return (

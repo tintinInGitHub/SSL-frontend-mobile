@@ -45,7 +45,7 @@ function BookHistory({ navigation }) {
   }
   const onDel = async (id) => {
     console.log("onref");
-    axios
+    await axios
       .post("http://10.0.2.2:1337/api/booking/delBook", {
         id: id,
       })
@@ -56,12 +56,13 @@ function BookHistory({ navigation }) {
       .catch((error) => {
         console.log(error);
       });
+    loadBranch();
   };
   const [refreshing, setRefreshing] = useState(false);
   const [branch, setBranch] = useState(null);
   const loadBranch = async () => {
     // console.log("loadBranch");
-    axios
+    await axios
       .post("http://10.0.2.2:1337/api/booking/getBook", { user: 1111 })
       .then((response) => {
         console.log(response.data);
@@ -74,7 +75,7 @@ function BookHistory({ navigation }) {
 
   useEffect(() => {
     loadBranch();
-  }, []);
+  }, [branch]);
 
   const onRefresh = async () => {
     // console.log("onref");

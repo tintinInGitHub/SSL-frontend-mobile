@@ -9,6 +9,9 @@ import { View, Image, Text } from "react-native";
 import { TouchableOpacity } from "react-native";
 import BranchBook from "../screens/BranchBook";
 
+import { connect } from "react-redux";
+import { setSelectedBranch } from "../stores/branch/branchActions";
+
 const Tab = createBottomTabNavigator();
 const CustomTabBarButton = ({ children, onPress }) => (
   <TouchableOpacity
@@ -33,7 +36,7 @@ const CustomTabBarButton = ({ children, onPress }) => (
   </TouchableOpacity>
 );
 
-function Tabs() {
+function Tabs({ selectedBranch, setSelectedBranch }) {
   return (
     <Tab.Navigator
       initialRouteName={"Home"}
@@ -162,4 +165,20 @@ function Tabs() {
     </Tab.Navigator>
   );
 }
-export default Tabs;
+// export default Tabs;
+
+function mapStateToProps(state) {
+  return {
+    setSelectedBranch: state.branchReducer.selectedBranch,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setSelectedBranch: (selectedBranch) => {
+      return dispatch(setSelectedBranch(selectedBranch));
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tabs);
