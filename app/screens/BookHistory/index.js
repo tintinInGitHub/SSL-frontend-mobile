@@ -75,7 +75,7 @@ function BookHistory({ navigation }) {
 
   useEffect(() => {
     loadBranch();
-  }, [branch]);
+  }, []);
 
   const onRefresh = async () => {
     // console.log("onref");

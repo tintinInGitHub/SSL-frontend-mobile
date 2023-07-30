@@ -23,17 +23,6 @@ import styles from "./styles";
 function OrderHome({ navigation }) {
   function renderCategoryItem(itemData) {
     function pressHandler(item) {
-      var arr = {};
-      cart.map((x) => {
-        console.log(x);
-        if (typeof arr[x.id] == "undefined") arr[x.id] = 0;
-        arr[x.id]++;
-      });
-      // console.log(JSON.stringify(arr));
-      const result = Object.keys(arr).map((key) => ({
-        food_and_drinks: key,
-        quantity: arr[key],
-      }));
       setCart([...cart, item]);
     }
     return (
@@ -69,6 +58,17 @@ function OrderHome({ navigation }) {
   };
   const sendOrder = async () => {
     // console.log(result);
+    var arr = {};
+    cart.map((x) => {
+      console.log(x);
+      if (typeof arr[x.id] == "undefined") arr[x.id] = 0;
+      arr[x.id]++;
+    });
+    // console.log(JSON.stringify(arr));
+    const result = Object.keys(arr).map((key) => ({
+      food_and_drinks: key,
+      quantity: arr[key],
+    }));
     await axios
       .post("http://10.0.2.2:1337/api/order/addOrder", {
         user: "111111111",
