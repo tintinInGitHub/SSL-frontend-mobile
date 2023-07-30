@@ -19,7 +19,7 @@ import BookHistory from "./app/screens/BookHistory/index.js";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import rootReducer from "./app/stores/rootReducer.js";
+import rootReducer from "./app/stores/rootReducer";
 const Stack = createNativeStackNavigator();
 const store = createStore(rootReducer, applyMiddleware(thunk));
 

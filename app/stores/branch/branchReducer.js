@@ -5,6 +5,7 @@ const initialState = {
 };
 
 const branchReducer = (state = initialState, action) => {
+  console.log(action, "action");
   switch (action.type) {
     case branchActionTypes.SET_SELECTED_BRANCH:
       return {

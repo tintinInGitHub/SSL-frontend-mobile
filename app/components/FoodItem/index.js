@@ -37,6 +37,14 @@ function FoodItem({
               { backgroundColor: BaseColor.darkModeColor },
             ]}
           >
+            <View>
+              {/* <Image
+                style={{ width: 50, height: 200, resizeMode: "stretch" }}
+                source={{
+                  uri: "http://localhost:1337/uploads/2_1_9c7f565632.png",
+                }}
+              /> */}
+            </View>
             <Text style={styles.title}>
               {name}
               {calories}

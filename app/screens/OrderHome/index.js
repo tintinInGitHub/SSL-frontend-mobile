@@ -250,10 +250,12 @@ function OrderHome({ navigation }) {
         }
       >
         <View
-          style={{
-            backgroundColor: BaseColor.darkModeColor,
-            // paddingBottom: 100,
-          }}
+          style={
+            {
+              // backgroundColor: BaseColor.darkModeColor,
+              // paddingBottom: 100,
+            }
+          }
         >
           <FlatList
             data={food}
@@ -271,7 +273,7 @@ function OrderHome({ navigation }) {
     return (
       <View>
         <FAB
-          style={{ paddingBottom: 120, left: 150 }}
+          style={{ bottom: 115, left: 150 }}
           icon={{ name: "shopping-basket", color: "white", size: 25 }}
           size="medium"
           onPress={toggleModal}
@@ -299,7 +301,7 @@ function OrderHome({ navigation }) {
             <Icon
               name="times"
               size={20}
-              color={BaseColor.darkModeColor}
+              color={BaseColor.darkColor}
               enableRTL={true}
               style={{ position: "absolute", right: -4 }}
               onPress={toggleModal}
@@ -307,7 +309,7 @@ function OrderHome({ navigation }) {
             <Icon
               name="trash"
               size={20}
-              color={BaseColor.darkModeColor}
+              color={BaseColor.darkColor}
               enableRTL={true}
               style={{ position: "absolute", left: -4 }}
               onPress={clearCart}

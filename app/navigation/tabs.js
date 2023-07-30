@@ -168,6 +168,7 @@ function Tabs({ selectedBranch, setSelectedBranch }) {
 // export default Tabs;
 
 function mapStateToProps(state) {
+  console.log("map", state);
   return {
     setSelectedBranch: state.branchReducer.selectedBranch,
   };

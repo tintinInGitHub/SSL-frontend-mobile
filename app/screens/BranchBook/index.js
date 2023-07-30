@@ -27,6 +27,7 @@ function BranchBook({ navigation }) {
 
   function renderBranchyItem(itemData) {
     function pressHandler() {
+      // setSelectedBranch(itemData.item);
       setSelectedBranch(itemData.item);
       alert(JSON.stringify(store.getState()));
       navigation.navigate("Booking", { branch: itemData.item });

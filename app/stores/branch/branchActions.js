@@ -6,6 +6,7 @@ export const setSelectedBranchSuccess = (selectedBranch) => ({
 });
 
 export function setSelectedBranch(selectedBranch) {
+  console.log("setSelectedBranch", selectedBranch);
   return (dispatch) => {
     dispatch(setSelectedBranchSuccess(selectedBranch));
   };
