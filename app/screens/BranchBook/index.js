@@ -29,14 +29,15 @@ function BranchBook({ navigation }) {
 
   function renderBranchyItem(itemData) {
     function pressHandler() {
+      // console.log(itemData.item);
       // setSelectedBranch(itemData.item);
-      // setSelectedBranch(itemData.item);
-      dispatch({
-        type: "SET_SELCTED_BRANCH",
-        payload: itemData.item,
-      });
+      dispatch(setSelectedBranch(itemData.item));
+      // dispatch({
+      //   type: "SET_SELCTED_BRANCH",
+      //   payload: itemData.item,
+      // });
       // alert(JSON.stringify(store.getState()));
-      navigation.navigate("Booking", { branch: itemData.item });
+      navigation.navigate("Booking");
     }
     return (
       <CategoryGridTile

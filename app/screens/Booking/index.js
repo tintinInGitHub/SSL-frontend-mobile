@@ -38,7 +38,6 @@ function Booking({ navigation, route }) {
       tel: tel,
       seat: seat,
       name: name,
-      branch: route?.params?.branch,
     });
   };
   const onPressSubmit = () => {
@@ -82,8 +81,9 @@ function Booking({ navigation, route }) {
         }}
       />
       <Text>Branch (สาขา)</Text>
-      <Text>{JSON.stringify(route?.params?.branch?.name)}</Text>
-      {/* <Text>{JSON.stringify(b)}</Text> */}
+      {/* <Text>{JSON.stringify(route?.params?.branch?.name)}</Text> */}
+      <Text>{branch}</Text>
+      <Text>{JSON.stringify(b)}</Text>
       <Text>Name (ชื่อ)</Text>
       <TextInput
         style={styles.input}
