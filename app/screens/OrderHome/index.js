@@ -48,6 +48,7 @@ function OrderHome({ navigation }) {
   const [selectedMenu, setSelectedMenu] = useState(1);
   const [refreshing, setRefreshing] = useState(false);
   const branch = useSelector((state) => state.branchReducer.selectedBranch);
+  const user = useSelector((state) => state.userReducer.user);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -75,7 +76,7 @@ function OrderHome({ navigation }) {
     }));
     await axios
       .post("http://10.0.2.2:1337/api/order/addOrder", {
-        user: "111111111",
+        user: user,
         branch: branch.id,
         listOrder: result,
       })

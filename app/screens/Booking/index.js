@@ -22,6 +22,7 @@ function Booking({ navigation, route }) {
   const [date, setDate] = useState(route?.params?.date);
   // const [branch, setBranch] = useState(route?.params?.branch?.id);
   const branch = useSelector((state) => state.branchReducer.selectedBranch);
+  const user = useSelector((state) => state.userReducer.user);
   const b = useSelector((state) => state);
   const minDate = new Date();
   const maxDate = new Date(Date.now() + 3600 * 1000 * 24 * 60);
@@ -39,14 +40,14 @@ function Booking({ navigation, route }) {
     });
   };
   const onPressSubmit = () => {
-    console.log("go");
+    console.log("go", user);
     navigation.navigate("Home");
     axios
       .post("http://10.0.2.2:1337/api/booking/book", {
         mobile: tel,
         name: name,
         amount: seat,
-        user: 1111,
+        user: user,
         branch: branch.name,
         date: date,
       })
