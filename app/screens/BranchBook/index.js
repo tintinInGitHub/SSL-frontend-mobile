@@ -21,15 +21,21 @@ import { Store } from "redux";
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from "../../stores/rootReducer";
 import thunk from "redux-thunk";
+import { useDispatch } from "react-redux";
 
 function BranchBook({ navigation }) {
   const store = createStore(rootReducer, applyMiddleware(thunk));
+  const dispatch = useDispatch();
 
   function renderBranchyItem(itemData) {
     function pressHandler() {
       // setSelectedBranch(itemData.item);
-      setSelectedBranch(itemData.item);
-      alert(JSON.stringify(store.getState()));
+      // setSelectedBranch(itemData.item);
+      dispatch({
+        type: "SET_SELCTED_BRANCH",
+        payload: itemData.item,
+      });
+      // alert(JSON.stringify(store.getState()));
       navigation.navigate("Booking", { branch: itemData.item });
     }
     return (

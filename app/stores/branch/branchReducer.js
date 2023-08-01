@@ -1,16 +1,23 @@
-import * as branchActionTypes from "./branchActions";
+import * as types from "./branchActions";
 
 const initialState = {
   selectedBranch: "",
 };
 
-const branchReducer = (state = initialState, action) => {
-  console.log(action, "action");
+const branchReducer = (state = initialState, action = {}) => {
+  console.log(
+    state,
+    "state",
+    "action.type",
+    action.type,
+    "action.payload",
+    action.payload
+  );
   switch (action.type) {
-    case branchActionTypes.SET_SELECTED_BRANCH:
+    case "SET_SELCTED_BRANCH":
       return {
         ...state,
-        selectedBranch: action.payload.selectedBranch,
+        selectedBranch: action.payload,
       };
     default:
       return state;

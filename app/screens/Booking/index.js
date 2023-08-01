@@ -13,13 +13,18 @@ import axios from "axios";
 import Header from "../../components/Header";
 import Icon from "../../components/Icon/index";
 import { BaseColor } from "../../config/theme";
+import { useSelector } from "react-redux";
 
 function Booking({ navigation, route }) {
   const [name, setName] = useState(route?.params?.name);
   const [tel, setTel] = useState(route?.params?.tel);
   const [seat, setSeat] = useState(route?.params?.seat);
   const [date, setDate] = useState(route?.params?.date);
-  const [branch, setBranch] = useState(route?.params?.branch?.id);
+  // const [branch, setBranch] = useState(route?.params?.branch?.id);
+  const branch = useSelector(
+    (state) => state.branchReducer.selectedBranch.name
+  );
+  const b = useSelector((state) => state);
   const minDate = new Date();
   const maxDate = new Date(Date.now() + 3600 * 1000 * 24 * 60);
   const maxSeat = 30;
@@ -78,6 +83,7 @@ function Booking({ navigation, route }) {
       />
       <Text>Branch (สาขา)</Text>
       <Text>{JSON.stringify(route?.params?.branch?.name)}</Text>
+      {/* <Text>{JSON.stringify(b)}</Text> */}
       <Text>Name (ชื่อ)</Text>
       <TextInput
         style={styles.input}

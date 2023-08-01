@@ -5,9 +5,13 @@ export const setSelectedBranchSuccess = (selectedBranch) => ({
   payload: { selectedBranch },
 });
 
-export function setSelectedBranch(selectedBranch) {
+export const setSelectedBranch = (selectedBranch) => async (dispatch) => {
   console.log("setSelectedBranch", selectedBranch);
-  return (dispatch) => {
-    dispatch(setSelectedBranchSuccess(selectedBranch));
-  };
-}
+  // return (dispatch) => {
+  //   dispatch(setSelectedBranchSuccess(selectedBranch));
+  // };
+  dispatch({
+    type: actionTypes.SET_SELECTED_BRANCH,
+    payload: selectedBranch,
+  });
+};
