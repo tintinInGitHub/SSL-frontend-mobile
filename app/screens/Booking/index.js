@@ -21,9 +21,7 @@ function Booking({ navigation, route }) {
   const [seat, setSeat] = useState(route?.params?.seat);
   const [date, setDate] = useState(route?.params?.date);
   // const [branch, setBranch] = useState(route?.params?.branch?.id);
-  const branch = useSelector(
-    (state) => state.branchReducer.selectedBranch.name
-  );
+  const branch = useSelector((state) => state.branchReducer.selectedBranch);
   const b = useSelector((state) => state);
   const minDate = new Date();
   const maxDate = new Date(Date.now() + 3600 * 1000 * 24 * 60);
@@ -49,7 +47,7 @@ function Booking({ navigation, route }) {
         name: name,
         amount: seat,
         user: 1111,
-        branch: branch,
+        branch: branch.name,
         date: date,
       })
       .then((response) => {
@@ -82,8 +80,8 @@ function Booking({ navigation, route }) {
       />
       <Text>Branch (สาขา)</Text>
       {/* <Text>{JSON.stringify(route?.params?.branch?.name)}</Text> */}
-      <Text>{branch}</Text>
-      <Text>{JSON.stringify(b)}</Text>
+      <Text>{branch.name}</Text>
+      {/* <Text>{JSON.stringify(b)}</Text> */}
       <Text>Name (ชื่อ)</Text>
       <TextInput
         style={styles.input}
