@@ -18,6 +18,8 @@ import Header from "../../components/Header";
 import FoodItem from "../../components/FoodItem";
 import { FAB } from "@rneui/themed";
 import Modal from "react-native-modal";
+import { useSelector } from "react-redux";
+
 import styles from "./styles";
 
 function OrderHome({ navigation }) {
@@ -45,6 +47,8 @@ function OrderHome({ navigation }) {
   const [keyword, setKeyword] = useState(null);
   const [selectedMenu, setSelectedMenu] = useState(1);
   const [refreshing, setRefreshing] = useState(false);
+  const branch = useSelector((state) => state.branchReducer.selectedBranch);
+
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
@@ -72,7 +76,7 @@ function OrderHome({ navigation }) {
     await axios
       .post("http://10.0.2.2:1337/api/order/addOrder", {
         user: "111111111",
-        branch: 1,
+        branch: branch.id,
         listOrder: result,
       })
       .then((response) => {})
